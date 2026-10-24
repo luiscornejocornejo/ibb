@@ -1,4 +1,10 @@
-export default function SinAcceso() {
+import { redirect } from "next/navigation";
+import { getPerfil } from "@/lib/auth";
+
+export default async function SinAcceso() {
+  const perfil = await getPerfil();
+  if (perfil && perfil.roles.length > 0) redirect("/admin");
+
   return (
     <div className="tarjeta max-w-lg">
       <h1 className="text-lg font-semibold">Todavía no tenés un área asignada</h1>
